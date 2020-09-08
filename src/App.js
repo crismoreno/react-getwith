@@ -34,6 +34,10 @@ class App extends Component {
     });
   }
 
+  selectTaskForEdit(taskName) {
+    console.log(taskName);
+  }
+
   render() {
     const { tasks } = this.state;
 
@@ -50,7 +54,11 @@ class App extends Component {
     return (
       <div className="App">
         <Controls addNewTask={this.handlerAddNewTask} />
-        <Board stagesTasks={stagesTasks} stagesNames={this.stagesNames} />
+        <Board
+          stagesTasks={stagesTasks}
+          stagesNames={this.stagesNames}
+          selectTaskForEdit={this.selectTaskForEdit}
+        />
       </div>
     );
   }
