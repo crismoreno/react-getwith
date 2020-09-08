@@ -22,7 +22,8 @@ class App extends Component {
         { name: "task 8", stage: 2 },
         { name: "task 9", stage: 3 },
       ],
-      taskToEdit: "",
+      taskToEditName: "",
+      taskToEditStage: null,
     };
     this.stagesNames = ["Backlog", "To Do", "Ongoing", "Done"];
     this.handlerAddNewTask = this.handlerAddNewTask.bind(this);
@@ -40,7 +41,7 @@ class App extends Component {
 
   handlerDeleteTask() {
     const tasks = this.state.tasks;
-    const taskToBeEdited = this.state.taskToEdit;
+    const taskToBeEdited = this.state.taskToEditName;
     const newTasks = tasks.filter(function (item) {
       return item.name !== taskToBeEdited;
     });
@@ -48,12 +49,12 @@ class App extends Component {
     this.setState({
       tasks: newTasks,
     });
-    this.setState({ taskToEdit: "" });
+    this.setState({ taskToEditName: "", taskToEditStage: null });
   }
 
   handlerMove(direction) {
     const tasks = this.state.tasks;
-    const taskToBeEdited = this.state.taskToEdit;
+    const taskToBeEdited = this.state.taskToEditName;
 
     const taskIndex = tasks.findIndex((task) => task.name === taskToBeEdited);
 
@@ -82,8 +83,8 @@ class App extends Component {
     });
   }
 
-  selectTaskForEdit(taskName) {
-    this.setState({ taskToEdit: taskName });
+  selectTaskForEdit(taskName, taskStage) {
+    this.setState({ taskToEditName: taskName, taskToEditStage: taskStage });
   }
 
   render() {
@@ -103,7 +104,8 @@ class App extends Component {
       <div className="App">
         <Controls
           addNewTask={this.handlerAddNewTask}
-          taskToEdit={this.state.taskToEdit}
+          taskToEditName={this.state.taskToEditName}
+          taskToEditStage={this.state.taskToEditStage}
           handlerDeleteTask={this.handlerDeleteTask}
           handlerMove={this.handlerMove}
         />

@@ -4,7 +4,7 @@ const taskNameToId = (name) => {
   return `task-${name}`;
 };
 
-const Task = ({ name, selectTaskForEdit }) => {
+const Task = ({ name, stage, selectTaskForEdit }) => {
   return (
     <div
       style={{
@@ -14,7 +14,7 @@ const Task = ({ name, selectTaskForEdit }) => {
         cursor: "pointer",
       }}
       data-testid={taskNameToId(name)}
-      onClick={() => selectTaskForEdit(name)}
+      onClick={() => selectTaskForEdit(name, stage)}
     >
       {name}
     </div>

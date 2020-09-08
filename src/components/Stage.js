@@ -19,6 +19,7 @@ const Stage = ({ name, stageId, tasks, selectTaskForEdit }) => {
           <Task
             key={index}
             name={task.name}
+            stage={task.stage}
             selectTaskForEdit={selectTaskForEdit}
           />
         ))}

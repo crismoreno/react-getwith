@@ -16,6 +16,7 @@ class Controls extends Component {
   }
 
   render() {
+    console.log(this.props.taskToEditStage);
     return (
       <div style={{ padding: "1rem", background: "#D6F3FF" }}>
         <h1>Controls</h1>
@@ -47,11 +48,16 @@ class Controls extends Component {
             placeholder="Selected task name"
             style={{ fontSize: "1rem" }}
             data-testid="selected-task-field"
-            value={this.props.taskToEdit}
+            value={this.props.taskToEditName}
           />
           <button
             style={{ marginLeft: "1rem" }}
-            disabled={this.props.taskToEdit === "" ? "disabled" : null}
+            disabled={
+              this.props.taskToEditStage < 1 ||
+              this.props.taskToEditStage === null
+                ? "disabled"
+                : null
+            }
             data-testid="move-back-btn"
             onClick={() => {
               this.props.handlerMove("back");
@@ -61,7 +67,12 @@ class Controls extends Component {
           </button>
           <button
             style={{ marginLeft: "1rem" }}
-            disabled={this.props.taskToEdit === "" ? "disabled" : null}
+            disabled={
+              this.props.taskToEditStage > 2 ||
+              this.props.taskToEditStage === null
+                ? "disabled"
+                : null
+            }
             data-testid="move-forward-btn"
             onClick={() => {
               this.props.handlerMove("forward");
@@ -71,7 +82,7 @@ class Controls extends Component {
           </button>
           <button
             style={{ marginLeft: "1rem" }}
-            disabled={this.props.taskToEdit === "" ? "disabled" : null}
+            disabled={this.props.taskToEditName === "" ? "disabled" : null}
             data-testid="delete-btn"
             onClick={this.props.handlerDeleteTask}
           >
