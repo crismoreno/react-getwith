@@ -53,6 +53,9 @@ class Controls extends Component {
             style={{ marginLeft: "1rem" }}
             disabled={this.props.taskToEdit === "" ? "disabled" : null}
             data-testid="move-back-btn"
+            onClick={() => {
+              this.props.handlerMove("back");
+            }}
           >
             Move back
           </button>
@@ -60,6 +63,9 @@ class Controls extends Component {
             style={{ marginLeft: "1rem" }}
             disabled={this.props.taskToEdit === "" ? "disabled" : null}
             data-testid="move-forward-btn"
+            onClick={() => {
+              this.props.handlerMove("forward");
+            }}
           >
             Move forward
           </button>

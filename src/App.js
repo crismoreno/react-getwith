@@ -27,6 +27,7 @@ class App extends Component {
     this.stagesNames = ["Backlog", "To Do", "Ongoing", "Done"];
     this.handlerAddNewTask = this.handlerAddNewTask.bind(this);
     this.selectTaskForEdit = this.selectTaskForEdit.bind(this);
+    this.handlerMove = this.handlerMove.bind(this);
     this.handlerDeleteTask = this.handlerDeleteTask.bind(this);
   }
 
@@ -48,6 +49,37 @@ class App extends Component {
       tasks: newTasks,
     });
     this.setState({ taskToEdit: "" });
+  }
+
+  handlerMove(direction) {
+    const tasks = this.state.tasks;
+    const taskToBeEdited = this.state.taskToEdit;
+
+    const taskIndex = tasks.findIndex((task) => task.name === taskToBeEdited);
+
+    const newRestOfTasks = tasks.filter(function (item) {
+      return item.name !== taskToBeEdited;
+    });
+
+    let newTask = { name: "", stage: "" };
+    switch (direction) {
+      case "forward":
+        newTask = {
+          name: taskToBeEdited,
+          stage: (tasks[taskIndex].stage = tasks[taskIndex].stage + 1),
+        };
+
+        break;
+      case "back":
+        newTask = {
+          name: taskToBeEdited,
+          stage: (tasks[taskIndex].stage = tasks[taskIndex].stage - 1),
+        };
+        break;
+    }
+    this.setState({
+      tasks: [...newRestOfTasks, newTask],
+    });
   }
 
   selectTaskForEdit(taskName) {
@@ -73,6 +105,7 @@ class App extends Component {
           addNewTask={this.handlerAddNewTask}
           taskToEdit={this.state.taskToEdit}
           handlerDeleteTask={this.handlerDeleteTask}
+          handlerMove={this.handlerMove}
         />
         <Board
           stagesTasks={stagesTasks}
