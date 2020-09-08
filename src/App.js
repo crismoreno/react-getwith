@@ -22,9 +22,12 @@ class App extends Component {
         { name: "task 8", stage: 2 },
         { name: "task 9", stage: 3 },
       ],
+      taskToEdit: "",
     };
     this.stagesNames = ["Backlog", "To Do", "Ongoing", "Done"];
     this.handlerAddNewTask = this.handlerAddNewTask.bind(this);
+    this.selectTaskForEdit = this.selectTaskForEdit.bind(this);
+    this.handlerDeleteTask = this.handlerDeleteTask.bind(this);
   }
 
   handlerAddNewTask(taskName) {
@@ -34,8 +37,21 @@ class App extends Component {
     });
   }
 
+  handlerDeleteTask() {
+    const tasks = this.state.tasks;
+    const taskToBeEdited = this.state.taskToEdit;
+    const newTasks = tasks.filter(function (item) {
+      return item.name !== taskToBeEdited;
+    });
+
+    this.setState({
+      tasks: newTasks,
+    });
+    this.setState({ taskToEdit: "" });
+  }
+
   selectTaskForEdit(taskName) {
-    console.log(taskName);
+    this.setState({ taskToEdit: taskName });
   }
 
   render() {
@@ -53,7 +69,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Controls addNewTask={this.handlerAddNewTask} />
+        <Controls
+          addNewTask={this.handlerAddNewTask}
+          taskToEdit={this.state.taskToEdit}
+          handlerDeleteTask={this.handlerDeleteTask}
+        />
         <Board
           stagesTasks={stagesTasks}
           stagesNames={this.stagesNames}

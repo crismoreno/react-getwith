@@ -47,25 +47,27 @@ class Controls extends Component {
             placeholder="Selected task name"
             style={{ fontSize: "1rem" }}
             data-testid="selected-task-field"
+            value={this.props.taskToEdit}
           />
           <button
             style={{ marginLeft: "1rem" }}
-            disabled
+            disabled={this.props.taskToEdit === "" ? "disabled" : null}
             data-testid="move-back-btn"
           >
             Move back
           </button>
           <button
             style={{ marginLeft: "1rem" }}
-            disabled
+            disabled={this.props.taskToEdit === "" ? "disabled" : null}
             data-testid="move-forward-btn"
           >
             Move forward
           </button>
           <button
             style={{ marginLeft: "1rem" }}
-            disabled
+            disabled={this.props.taskToEdit === "" ? "disabled" : null}
             data-testid="delete-btn"
+            onClick={this.props.handlerDeleteTask}
           >
             Delete
           </button>
