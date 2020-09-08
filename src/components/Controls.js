@@ -33,7 +33,10 @@ class Controls extends Component {
             style={{ marginLeft: "1rem" }}
             disabled={this.state.newTaskTitle === "" ? "disabled" : null}
             data-testid="create-task-btn"
-            onClick={() => this.props.addNewTask(this.state.newTaskTitle)}
+            onClick={() => {
+              this.props.addNewTask(this.state.newTaskTitle);
+              this.setState({ newTaskTitle: "" });
+            }}
           >
             Create
           </button>
