@@ -63,23 +63,26 @@ class App extends Component {
     });
 
     let newTask = { name: "", stage: "" };
+    let newStage = null;
     switch (direction) {
       case "forward":
+        newStage = tasks[taskIndex].stage = tasks[taskIndex].stage + 1;
         newTask = {
           name: taskToBeEdited,
-          stage: (tasks[taskIndex].stage = tasks[taskIndex].stage + 1),
+          stage: newStage,
         };
-
         break;
       case "back":
+        newStage = tasks[taskIndex].stage = tasks[taskIndex].stage - 1;
         newTask = {
           name: taskToBeEdited,
-          stage: (tasks[taskIndex].stage = tasks[taskIndex].stage - 1),
+          stage: newStage,
         };
         break;
     }
     this.setState({
       tasks: [...newRestOfTasks, newTask],
+      taskToEditStage: newStage,
     });
   }
 
